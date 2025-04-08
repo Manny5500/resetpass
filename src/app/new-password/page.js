@@ -9,12 +9,12 @@ export default function NewPasswordPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   
-
+  const supabase = createClient(
+    "https://lahglbozapnbgwxwxvnz.supabase.co",
+       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhaGdsYm96YXBuYmd3eHd4dm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgyMDgzMjEsImV4cCI6MjA1Mzc4NDMyMX0.mvoIG2SNEGKsGPSF6h_c9oYIbnonhn7um8EMrWU-YBE"
+      )
   useEffect(() => {
-    const supabase = createClient(
-  "https://lahglbozapnbgwxwxvnz.supabase.co",
-     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhaGdsYm96YXBuYmd3eHd4dm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgyMDgzMjEsImV4cCI6MjA1Mzc4NDMyMX0.mvoIG2SNEGKsGPSF6h_c9oYIbnonhn7um8EMrWU-YBE"
-    )
+   
     const checkAuth = async () => {
       const { data, error } = await supabase.auth.getSession()
       if (data?.session) {
