@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-"https://lahglbozapnbgwxwxvnz.supabase.co",
- "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhaGdsYm96YXBuYmd3eHd4dm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgyMDgzMjEsImV4cCI6MjA1Mzc4NDMyMX0.mvoIG2SNEGKsGPSF6h_c9oYIbnonhn7um8EMrWU-YBE"
+
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 export default function RootLayout({children}) {
- 
   return (
     <html>
       <body>
@@ -18,10 +18,8 @@ export default function RootLayout({children}) {
     </div>
       </body>
     </html>
-
   );
 }
-
 //for sign up
 /*
 export default function RootLayout({children}) {
@@ -46,15 +44,10 @@ export default function RootLayout({children}) {
     });
     setMessage(error ? error.message : 'Check your email for the reset link!');
   };
-
   return (
     <html>
       <body>
       <div>
-
-
-
-      
       <h1>Sign Up</h1>
       <form onSubmit={handleResetPassword}>
         <input
@@ -77,7 +70,6 @@ export default function RootLayout({children}) {
     </div>
       </body>
     </html>
-    
   );
 }
 */
