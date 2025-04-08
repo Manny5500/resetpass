@@ -120,6 +120,7 @@ const supabase = createClient(
         {isAuthenticated ? (
           <>
             <h1 style={styles.heading}>New Password</h1>
+            {message && <p style={styles.message}>{message}</p>}
             <form onSubmit={handleNewPassword} style={styles.form}>
               <input
                 type="password"
@@ -138,7 +139,6 @@ const supabase = createClient(
                 Submit
               </button>
             </form>
-            {message && <p style={styles.message}>{message}</p>}
           </>
         ) : (
           <p style={styles.infoMessage}>{message}</p>
