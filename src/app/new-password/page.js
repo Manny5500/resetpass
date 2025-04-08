@@ -72,10 +72,6 @@ const styles = {
   },
 };
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 
 export default function NewPasswordPage() {
@@ -84,6 +80,10 @@ export default function NewPasswordPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
  
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
   useEffect(() => {
     const checkAuth = async () => {
       const { data, error } = await supabase.auth.getSession();
