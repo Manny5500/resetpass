@@ -1,56 +1,47 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { useEffect, useState } from 'react'
+import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+export default function NewPasswordPage() {
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-export default function Home() {
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  )
 
   useEffect(() => {
-    // Ensure user is authenticated from URL token
-    const supabase = createClient(
-    
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
-    
     const checkAuth = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (data.session) {
-        setIsAuthenticated(true);
+      const { data, error } = await supabase.auth.getSession()
+      if (data?.session) {
+        setIsAuthenticated(true)
       } else if (error) {
-        setMessage('Session expired or invalid. Please request a new reset link.');
+        setMessage('Session expired or invalid. Please request a new reset link.')
       } else {
-        setMessage('No active session found. Please request a new reset link.');
+        setMessage('No active session found. Please request a new reset link.')
       }
-    };
-    checkAuth();
-  }, []);
+    }
+    checkAuth()
+  }, [])
 
   const handleNewPassword = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!isAuthenticated) {
-      setMessage('You must be authenticated to update your password.');
-      return;
+      setMessage('You must be authenticated to update your password.')
+      return
     }
 
     try {
-      const { error } = await supabase.auth.updateUser({ password });
-      if (error) {
-        throw error;
-      }
-      setMessage('Password updated successfully! You can now log in.');
+      const { error } = await supabase.auth.updateUser({ password })
+      if (error) throw error
+      setMessage('Password updated successfully! You can now log in.')
     } catch (error) {
-      setMessage(error.message);
+      setMessage(error.message)
     }
-  };
+  }
 
   return (
     <div>
@@ -71,5 +62,5 @@ export default function Home() {
       )}
       {message && isAuthenticated && <p>{message}</p>}
     </div>
-  );
+  )
 }
