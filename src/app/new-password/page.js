@@ -15,6 +15,12 @@ export default function Home() {
 
   useEffect(() => {
     // Ensure user is authenticated from URL token
+    const supabase = createClient(
+    
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+    
     const checkAuth = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (data.session) {
