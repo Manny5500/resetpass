@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from '../supabaseClient';
 
 const styles = {
   container: {
@@ -72,18 +72,12 @@ const styles = {
   },
 };
 
-
-
 export default function NewPasswordPage() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
  
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+
   useEffect(() => {
     const checkAuth = async () => {
       const { data, error } = await supabase.auth.getSession();
@@ -113,7 +107,6 @@ const supabase = createClient(
       setMessage(error.message);
     }
   };
-
   return (
     <div style={styles.container}>
       <div style={styles.card}>
